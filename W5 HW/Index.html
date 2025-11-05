@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "Stylesheet" type="text/css" href="css/styles.css">
+<title>Week5 Horror Escape</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="1000" style="border:3px solid #000000; background-color: grey ;" ></canvas>
+
+    <script>
+
+        const canvas = document.getElementById('myCanvas');
+         const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = 'black'; // Or any other color like '#FF0000', 'rgb(255, 0, 0)'
+
+        //Room 1
+        ctx.fillRect(0, 800, 150, 60);
+        
+        ctx.fillRect(100, 860, 50, -420); 
+    
+        ctx.fillRect(100, 300, 50, -140); 
+    
+        ctx.fillRect(0, 130, 150, 60);
+
+        //Wall 1
+        ctx.fillRect(300, 100, 700, -600);
+
+        //obstacle
+        ctx.fillRect(400, 250, 300, 200);
+
+        //Room 2
+
+    </script>
+
+    
+
+
+</body>
+</html>
