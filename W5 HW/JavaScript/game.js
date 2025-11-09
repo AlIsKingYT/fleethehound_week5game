@@ -1,77 +1,74 @@
-/*-------------------------------------------
-Game Setup
- 1. canvas 
- 2. context
- 3. frame rate
- 4. animation timer runs main function 60 frames per second
--------------------------------------------*/
-var c = document.querySelector(`myCanvas`)
-var ctx = c.getContext(`2d`)
-var fps = 1000/60
-var timer = setInterval(main, fps)
+//Canvas
+var c = document.querySelector('#myCanvas');
+var ctx = c.getContext('2d');
 
-    
-/*------------Declare Variables Here--------*/
+//Player
+var playerImage = new Image();
+playerImage.src = 'images/player.png';
 
+var player = {
+  x: 10,
+  y: 765,
+  w: 169,
+  h: 121,
+  speed: 3.5
+};
 
+//Walls and rooms
+var walls = [
+  //Room 1
+  { x: 0, y: 700, w: 150, h: 60 },
+  { x: 100, y: 470, w: 50, h: 290 },
+  { x: 100, y: 160, w: 50, h: 140 },
+  { x: 0, y: 130, w: 150, h: 60 },
 
+  // Wall 1
+  { x: 300, y: 0, w: 1700, h: 110 },
 
-/*--------------main()------------------------
-This is the function that makes the game work
----------------------------------------------*/
+  // Obstacle
+  { x: 270, y: 370, w: 250, h: 200 },
 
-function main()
-{
-    //erases the screen
-    ctx.clearRect(0,0,c.width,c.height); 
+  // Room 2
+  { x: 670, y: 710, w: 50, h: 290 },
+  { x: 670, y: 420, w: 50, h: 150 },
+  { x: 670, y: 420, w: 350, h: 50 },
+  { x: 1000, y: 420, w: 50, h: 150 },
+  { x: 1000, y: 710, w: 50, h: 290 },
 
-    //Any changes to numbers
+  // Room 3
+  { x: 1300, y: 350, w: 50, h: 150 },
+  { x: 1300, y: 330, w: 50, h: 120 },
+  { x: 1300, y: 405, w: 180, h: 45 },
+  { x: 1435, y: 435, w: 45, h: 165 },
+  { x: 1470, y: 555, w: 130, h: 45 },
 
-    //Any collision detection 
+  // Room 4
+  { x: 1700, y: 250, w: 50, h: 150 },
 
-    //draw the pictures
+  // Exit
+  { x: 1000, y: 745, w: 300, h: 50 },
+  { x: 1500, y: 745, w: 300, h: 50 },
+
+  // Wall 2
+  { x: 1700, y: 400, w: 300, h: 600 }
+];
+
+playerImage.onload = function () {
+  setInterval(main, 1000 / 60);
+};
+
+function main() {
+
+  ctx.clearRect(0, 0, c.width, c.height);
+
+  for (var i = 0; i < walls.length; i++) {
+    ctx.fillRect(walls[i].x, walls[i].y, walls[i].w, walls[i].h);
+  }
+
+  if (w) player.y -= player.speed;
+  if (s) player.y += player.speed;
+  if (a) player.x -= player.speed;
+  if (d) player.x += player.speed;
+
+  ctx.drawImage(playerImage, player.x, player.y, player.w, player.h);
 }
-
-//random number generator
-function rand(_low, _high)
-{
-    return Math.random()*(_high - _low) + _low;
-}
-//Converts degrees to radians
-function radians(_deg)
-{
-    return _deg * Math.PI/180
-}
-
-//Converts radians to degrees
-function degrees(_rad)
-{
-    return _rad * 180/Math.PI
-}
-/*-------Diagram--------
-
-               /|        c = the hypoteneuse
-            c / |        b = height
-             /  | b      a = width
-            /   |        T = arch tangent angle
-           /T___|
-             a
-
---------------------------
-
-To get a and b (displacement) when you know two points
-  
-    a = destination.x - starting.x
-    b = destination.y - starting.y
-
-To get the total distance (hypotenuese) between two points
-    c = Math.sqrt(_a*_a + _b*_b)
-
-To get the arc tangent angle (labeled T in the diagram)
-    radians = Math.atan2(b, a)
-
-To find a and b if you know c and T
-    a = Math.cos(T) * c
-    b = Math.sin(T) * c
-
-*/
