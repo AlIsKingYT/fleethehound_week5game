@@ -50,27 +50,5 @@ class GameObject {
     Used to check for collision between 2 objects
     This method checks to see where the various sides of one object are in relationship to another object's sides
     -------------------------------------------*/
-    overlaps(_obj) {
-        if (
-            this.top().y < _obj.bottom().y &&
-            this.bottom().y > _obj.top().y &&
-            this.left().x < _obj.right().x &&
-            this.right().x > _obj.left().x
-        ) {
-
-            return true
-        }
-        return false;
-    }
-    isOverPoint(_point) {
-        if (
-            this.top().y < _point.y &&
-            this.bottom().y > _point.y &&
-            this.left().x < _point.x &&
-            this.right().x > _point.x
-        ) {
-            return true
-        }
-        return false;
-    }
+    
 }

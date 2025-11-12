@@ -2,19 +2,7 @@
 var c = document.querySelector('#myCanvas');
 var ctx = c.getContext('2d');
 
-//Player
-var playerImage = new Image();
-playerImage.src = 'images/player.png';
 
-var player = {
-  x: 10,
-  y: 765,
-  w: 169,
-  h: 121,
-  speed: 3.5
-};
-
-//Walls and rooms
 var walls = [
   //Room 1
   { x: 0, y: 700, w: 150, h: 60 },
@@ -53,17 +41,88 @@ var walls = [
   { x: 1700, y: 400, w: 300, h: 600 }
 ];
 
+if (w) nextY -= player.speed;
+if (s) nextY += player.speed;
+if (a) nextX -= player.speed;
+if (d) nextX += player.speed;
+
+
+
+//Player
+var playerImage = new Image();
+playerImage.src = 'images/player.png';
+
+var player = {
+  x: 10,
+  y: 765,
+  w: 160,
+  h: 110,
+  speed: 3.5
+};
+
+
+let nextX = player.x;
+let nextY = player.y;
+
+
+//Walls and rooms
+
+
+// Check for collisions with each wall
+
+
+for (var i = 0; i < walls.length; i++) {
+  ctx.fillStyle = "black";
+  ctx.fillRect(walls[i].x, walls[i].y, walls[i].w, walls[i].h);
+}
+
+
+// Only update position if no collision
+if (!collides) {
+  player.x = nextX;
+  player.y = nextY;
+}
+
+
+  
+
+
 playerImage.onload = function () {
   setInterval(main, 1000 / 60);
 };
 
+var collides = false;
+//MAin Function
 function main() {
 
-  ctx.clearRect(0, 0, c.width, c.height);
 
-  for (var i = 0; i < walls.length; i++) {
+
+for (let i = 0; i < walls.length; i++) {
+  const wall = walls[i];
+  if (
+    nextX < wall.x + wall.w &&
+    nextX + player.w > wall.x &&
+    nextY < wall.y + wall.h &&
+    nextY + player.h > wall.y
+  ) {
+    collides = true;
+    break;
+  }
+}
+
+// Only update position if no collision
+if (!collides) {
+  player.x = nextX;
+  player.y = nextY;
+}
+
+
+
+  ctx.clearRect(0, 0, c.width, c.height);
+for (var i = 0; i < walls.length; i++) {
     ctx.fillRect(walls[i].x, walls[i].y, walls[i].w, walls[i].h);
   }
+
 
   if (w) player.y -= player.speed;
   if (s) player.y += player.speed;
