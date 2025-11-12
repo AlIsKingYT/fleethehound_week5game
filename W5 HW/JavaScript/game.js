@@ -14,6 +14,16 @@ var player = {
   speed: 3.5
 };
 
+window.onload = function() {
+    document.getElementById('popup-overlay').style.display = 'block';
+    document.getElementById('popup-box').style.display = 'block';
+};
+
+document.getElementById('close-popup').onclick = function() {
+    document.getElementById('popup-overlay').style.display = 'none';
+    document.getElementById('popup-box').style.display = 'none';
+};
+
 //Walls and rooms
 var walls = [
   //Room 1
