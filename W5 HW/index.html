@@ -9,35 +9,24 @@
 </head>
 
 <body>
+  <audio id = "bgm" src="fth_theme.mp3" loop></audio>
+
     <canvas id="myCanvas" width="1880px" height="880px"
         style="border:3px solid #000000; background-color: grey ;"></canvas>
 
     <script src="JavaScript/controls.js"></script>
     <script src="JavaScript/game.js"></script>
+ 
+ <script>document.addEventListener("click", function () {
+    const audio = 
+    document.getElementById("bgm");
+    audio.play();
+    }, 
+    {once: true});
 
-  <!-- Audio element without autoplay or loop attributes -->
-  <!-- <audio id="themeAudio">
-    <source src="fth_theme.mp3" type="audio/mpeg">
+    </script>
    
-  </audio> -->
-
-  <!-- <script>
-    // Get the audio element
-    const audio = document.getElementById('themeAudio');
-
-    // Set loop to true
-    audio.loop = true;
-
-    // Play the audio when the page loads
-    window.addEventListener('load', () => {
-      audio.play().catch(error => {
-        console.error('Playback failed:', error);
-      });
-    });
-
-
-  </script> -->
-
+  Flee The Hound!!!              
 
 
 </body>

@@ -55,6 +55,18 @@ var player = {
 let nextX = player.x;
 let nextY = player.y;
 
+//Hound
+var houndImage = new Image();
+houndImage.src = 'images/hound.png';
+
+var hound = {
+  x: 709,
+  y: 78,
+  w: 250,
+  h: 165,
+};
+
+
 //Keys
 var key01 = new Image();
 key01.src = 'images/key01.png';
@@ -273,6 +285,8 @@ function main() {
   }
 
   ctx.drawImage(playerImage, player.x, player.y, player.w, player.h);
+  
+  ctx.drawImage(houndImage, hound.x, hound.y, hound.w, hound.h);
 
   if (!collectedKeys.key01) ctx.drawImage(key01, key01Image.x, key01Image.y, key01Image.w, key01Image.h);
 
