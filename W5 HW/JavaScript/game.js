@@ -73,6 +73,18 @@ var hound = {
   h: 165,
 };
 
+//Almond
+var almondImage = new Image();
+almondImage.src = 'images/almond.gif';
+
+var almond = {
+  x: 1335,
+  y: 798,
+  w: 150,
+  h: 85,
+};
+
+var almondCollected = false;
 
 //Keys
 var key01 = new Image();
@@ -127,6 +139,13 @@ function checkKeyPickup() {
   if (!collectedKeys.key02 && isColliding(player, key02Image)) collectedKeys.key02 = true;
   if (!collectedKeys.key03 && isColliding(player, key03Image)) collectedKeys.key03 = true;
   if (!collectedKeys.finalKey && isColliding(player, keyFinalImage)) collectedKeys.finalKey = true;
+}
+
+function checkAlmondPickup() {
+  if (!almondCollected && isColliding(player, almond)) {
+    almondCollected = true;
+    window.location.href = "https://www.youtube.com/watch?v=izPVtcnftiQ&t=2s";
+  }
 }
 
 function isColliding(rect1, rect2) {
@@ -212,6 +231,8 @@ function main() {
 
   checkKeyPickup();
 
+  checkAlmondPickup();
+
   ctx.clearRect(0, 0, c.width, c.height);
 
   let nextX = player.x;
@@ -294,6 +315,8 @@ function main() {
   ctx.drawImage(playerImage, player.x, player.y, player.w, player.h);
   
   ctx.drawImage(houndImage, hound.x, hound.y, hound.w, hound.h);
+
+  if (!almondCollected) ctx.drawImage(almondImage, almond.x, almond.y, almond.w, almond.h);
 
   if (!collectedKeys.key01) ctx.drawImage(key01, key01Image.x, key01Image.y, key01Image.w, key01Image.h);
 
